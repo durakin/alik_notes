@@ -35,6 +35,7 @@ class EventEdit extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           title: TextField(
+            style: Theme.of(context).textTheme.headline6,
             decoration: const InputDecoration(
               hintText: "Событие",
             ),
@@ -49,7 +50,7 @@ class EventEdit extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: null,
-              tooltip: "Save",
+              tooltip: "Сохранить",
             ),
           ],
         ),
@@ -59,9 +60,15 @@ class EventEdit extends StatelessWidget {
               shape: const Border(
                 top: BorderSide(width: 0),
               ),
+              color: const Color(0xff263238),
+
               child: ListTile(
-                  leading: Text("Время"),
+                  leading: const Text(
+                    "Время",
+                    style: TextStyle(color: Colors.white),
+                  ),
                   title: DateTimeField(
+                    style: const TextStyle(color: Colors.white),
                     format: format,
                     initialValue:
                         event != null ? event!.dateTime : DateTime.now(),
@@ -84,25 +91,26 @@ class EventEdit extends StatelessWidget {
                       }
                     },
                   )),
-              color: Colors.blue,
+              //color: Colors.blue,
               margin: const EdgeInsets.all(0),
             ),
             const Divider(
-              thickness: 8,
-              color: Colors.white,
+              thickness: 16,
+              color: Color(0xff263238),
             ),
             Card(
-                child: ListTile(
-                  leading:
-                      const Icon(Icons.place_outlined, color: Colors.white),
-                  title: TextField(
-                    decoration: const InputDecoration(
-                        hintText: "Место", contentPadding: EdgeInsets.all(16)),
-                    controller: TextEditingController(
-                        text: (event != null) ? event?.place : ""),
-                  ),
+              child: ListTile(
+                leading: const Icon(Icons.place_outlined, color: Colors.white),
+                title: TextField(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                      hintText: "Место", contentPadding: EdgeInsets.all(16)),
+                  controller: TextEditingController(
+                      text: (event != null) ? event?.place : ""),
                 ),
-                color: Colors.blue),
+              ),
+              color: const Color(0xff263238),
+            ),
             const Padding(
                 padding: EdgeInsets.all(16),
                 child: Image(image: AssetImage('assets/map.png'))),
@@ -142,7 +150,7 @@ class EventView extends StatelessWidget {
             //      MaterialPageRoute(
             //          builder: (context) => NoteEdit(note: note)));
             //},
-            tooltip: "Edit",
+            tooltip: "Редактировать",
           ),
           const IconButton(
             icon: Icon(
@@ -150,7 +158,7 @@ class EventView extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: null,
-            tooltip: "Delete",
+            tooltip: "Удалить",
           ),
         ],
       ),
@@ -160,34 +168,42 @@ class EventView extends StatelessWidget {
             shape: const Border(
               top: BorderSide(width: 0),
             ),
+            color: const Color(0xff263238),
             child: ListTile(
-              title: Text("Время"),
-              trailing: Text(
-                  DateFormat.yMd().add_Hm().format(event.dateTime.toUtc())),
-            ),
-            color: Colors.blue,
+                title:
+                    const Text("Время", style: TextStyle(color: Colors.white)),
+                trailing: Text(
+                  DateFormat.yMd().add_Hm().format(event.dateTime.toUtc()),
+                  style: const TextStyle(color: Colors.white),
+                )),
+            //color: Colors.blue,
             margin: const EdgeInsets.all(0),
           ),
           const Divider(
-            thickness: 8,
-            color: Colors.white,
+            thickness: 16,
+            color: Color(0xff263238),
           ),
           Card(
             child: ListTile(
-              title: Text(event.weather),
+              title: Text(
+                event.weather,
+                style: const TextStyle(color: Colors.white),
+              ),
               leading:
                   const Icon(Icons.thermostat_outlined, color: Colors.white),
             ),
-            color: Colors.blue,
+            color: const Color(0xff263238),
           ),
           Card(
-              child: ListTile(
-                title: Text(
-                  event.plainText,
-                ),
-                leading: const Icon(Icons.place_outlined, color: Colors.white),
+            child: ListTile(
+              title: Text(
+                event.plainText,
+                style: const TextStyle(color: Colors.white),
               ),
-              color: Colors.blue),
+              leading: const Icon(Icons.place_outlined, color: Colors.white),
+            ),
+            color: const Color(0xff263238),
+          ),
           const Padding(
               padding: EdgeInsets.all(16),
               child: Image(image: AssetImage('assets/map.png'))),
@@ -224,6 +240,7 @@ class _EventsState extends State<Events> {
           title: Text(
             event.name,
             maxLines: 1,
+            style: const TextStyle(color: Colors.white),
             //style: _biggerFont,
           ),
           subtitle: Text(event.plainText, maxLines: 1),
@@ -250,7 +267,7 @@ class _EventsState extends State<Events> {
           title: Text(
             event.name,
             maxLines: 1,
-            //style: _biggerFont,
+            style: const TextStyle(color: Colors.white),
           ),
           subtitle: Text(event.plainText, maxLines: 1),
           trailing: Column(
@@ -285,15 +302,48 @@ class _EventsState extends State<Events> {
 
     return Scaffold(
         drawer: Drawer(
-            child: ListView(children: [
-          ListTile(
-            title: const Text("Заметки"),
-            onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const Notes()));
-            },
-          )
-        ])),
+            child: Container(
+                margin: const EdgeInsets.only(top: 60),
+                child: ListView(children: [
+                  ListTile(
+                    leading: const Icon(Icons.calendar_today_outlined,
+                        color: Colors.white),
+                    title: Text(
+                      "События",
+                      style: (Theme.of(context).textTheme.headline6)
+                          ?.copyWith(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Events()));
+                    },
+                  ),
+                  //const Divider(height: 16, thickness: 0,),
+                  ListTile(
+                    leading: const Icon(Icons.sticky_note_2_outlined,
+                        color: Colors.white),
+                    title: Text("Заметки",
+                        style: (Theme.of(context).textTheme.headline6)
+                            ?.copyWith(color: Colors.white)),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Notes()));
+                    },
+                  ),
+                  const Divider(thickness: 2),
+                  ListTile(
+                    leading:
+                        const Icon(Icons.info_outline, color: Colors.white),
+                    title: Text("О приложении",
+                        style: (Theme.of(context).textTheme.headline6)
+                            ?.copyWith(color: Colors.white)),
+                    onTap: () {},
+                  )
+                ]))),
         appBar: AppBar(
           title: const Text('События'),
         ),

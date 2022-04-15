@@ -19,6 +19,7 @@ class NoteEdit extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
+          style: Theme.of(context).textTheme.headline6,
           decoration: const InputDecoration(
             hintText: "Название",
           ),
@@ -33,15 +34,17 @@ class NoteEdit extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: null,
-            tooltip: "Save",
+            tooltip: "Сохранить",
           ),
         ],
       ),
       body: TextField(
+        style: const TextStyle(color: Colors.white),
         decoration: const InputDecoration(
             hintText: "Содержание", contentPadding: EdgeInsets.all(16)),
-        controller:
-            TextEditingController(text: (note != null) ? note?.text : ""),
+        controller: TextEditingController(
+          text: (note != null) ? note?.text : "",
+        ),
         keyboardType: TextInputType.multiline,
         maxLines: null,
       ),
@@ -73,7 +76,7 @@ class NoteView extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => NoteEdit(note: note)));
               },
-              tooltip: "Edit",
+              tooltip: "Редактировать",
             ),
             IconButton(
               icon: const Icon(
@@ -81,13 +84,17 @@ class NoteView extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: null,
-              tooltip: "Delete",
+              tooltip: "Удалить",
             ),
           ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: Text(note.text),
+          child: Text(
+            note.text,
+            style: (Theme.of(context).textTheme.subtitle1)
+                ?.copyWith(color: Colors.white),
+          ),
         ));
   }
 }
@@ -109,14 +116,13 @@ class _NotesState extends State<Notes> {
         "Wireguard config", "[Interface] Privatekey = <Сюда приватый ключ>"),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     final tiles = _notes.map((note) => ListTile(
         title: Text(
           note.name,
           maxLines: 1,
-          //style: _biggerFont,
+          style: const TextStyle(color: Colors.white),
         ),
         subtitle: Text(note.plainText, maxLines: 1),
         onTap: () {
@@ -133,15 +139,45 @@ class _NotesState extends State<Notes> {
 
     return Scaffold(
       drawer: Drawer(
-          child: ListView(children: [
-            ListTile(
-              title: const Text("События"),
-              onTap: () {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => const Events()));
-              },
-            )
-          ])),
+          child: Container(
+              margin: const EdgeInsets.only(top: 60),
+              child: ListView(children: [
+                ListTile(
+                  leading: const Icon(Icons.calendar_today_outlined,
+                      color: Colors.white),
+                  title: Text(
+                    "События",
+                    style: (Theme.of(context).textTheme.headline6)
+                        ?.copyWith(color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Events()));
+                  },
+                ),
+                //const Divider(height: 16, thickness: 0,),
+                ListTile(
+                  leading: const Icon(Icons.sticky_note_2_outlined,
+                      color: Colors.white),
+                  title: Text("Заметки",
+                      style: (Theme.of(context).textTheme.headline6)
+                          ?.copyWith(color: Colors.white)),
+                  onTap: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => const Notes()));
+                  },
+                ),
+                const Divider(thickness: 2),
+                ListTile(
+                  leading: const Icon(Icons.info_outline, color: Colors.white),
+                  title: Text("О приложении",
+                      style: (Theme.of(context).textTheme.headline6)
+                          ?.copyWith(color: Colors.white)),
+                  onTap: () {},
+                )
+              ]))),
       appBar: AppBar(
         title: const Text('Заметки'),
       ),
