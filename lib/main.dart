@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'boxes.dart';
+import 'db/boxes.dart';
 import 'model/note.dart';
 
 void main() async {

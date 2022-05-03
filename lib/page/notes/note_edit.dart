@@ -1,8 +1,6 @@
 import 'package:alik_notes/model/note.dart';
-import 'package:alik_notes/page/notes/crud.dart';
+import 'package:alik_notes/db/notes_crud.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'note_view.dart';
 
@@ -33,6 +31,7 @@ class NoteEdit extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
+              if (nameController.text == "") return;
               if (note == null) {
                 addNote(Note(
                   nameController.text,

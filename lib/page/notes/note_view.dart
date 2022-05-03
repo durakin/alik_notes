@@ -1,9 +1,7 @@
 import 'package:alik_notes/model/note.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-import 'crud.dart';
+import '../../db/notes_crud.dart';
 import 'note_edit.dart';
 
 

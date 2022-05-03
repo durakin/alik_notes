@@ -1,6 +1,6 @@
 import 'package:alik_notes/model/note.dart';
 
-import '../../boxes.dart';
+import 'boxes.dart';
 
 Future<void> editNote(Note note, String newName, String newText) {
   note.name = newName;

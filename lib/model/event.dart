@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
@@ -7,14 +5,14 @@ part 'event.g.dart';
 
 @HiveType(typeId: 1)
 class Event extends HiveObject {
+  @HiveField(0)
+  late String name;
+
   @HiveField(1)
-  final String name;
+  late DateTime dateTime;
 
   @HiveField(2)
-  final DateTime dateTime;
-
-  @HiveField(3)
-  final String? place;
+  late String? place;
 
   bool get isPast => DateTime.now().toUtc().isAfter(dateTime);
 

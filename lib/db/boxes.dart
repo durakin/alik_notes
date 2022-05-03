@@ -7,4 +7,10 @@ class Boxes {
       Hive.box<Note>('notes');
   static Box<Event> getEvents() =>
       Hive.box<Event>('events');
+
+  static void openNotes() async =>  await Hive.openBox<Note>('notes');
+  static void openEvents() async => await  Hive.openBox<Event>('events');
+
+  static Future<void> closeNotes() => getNotes().close();
+  static Future<void> closeEvents() => getEvents().close();
 }

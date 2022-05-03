@@ -1,10 +1,9 @@
 import 'package:alik_notes/model/note.dart';
-import 'package:alik_notes/events.dart';
+import 'package:alik_notes/page/events/events.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../boxes.dart';
+import '../../db/boxes.dart';
 import '../../model/note.dart';
 import 'note_edit.dart';
 import 'note_view.dart';
@@ -15,12 +14,6 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
-
-  @override
-  void dispose() {
-    Hive.box('notes').close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
