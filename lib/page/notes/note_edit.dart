@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'note_view.dart';
+
 class NoteEdit extends StatelessWidget {
   final Note? note;
 
@@ -35,11 +37,14 @@ class NoteEdit extends StatelessWidget {
                 addNote(Note(
                   nameController.text,
                   textController.text,
-                  null,
                 ));
+                Navigator.pop(context);
               }
-              else print("Trying to edit note");
-              Navigator.pop(context);
+              else {
+                editNote(note!, nameController.text, textController.text);
+                Navigator.pop(context);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NoteView(note: note!)));
+              }
             },
             tooltip: "Сохранить",
           ),

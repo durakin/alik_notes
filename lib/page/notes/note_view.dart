@@ -7,12 +7,17 @@ import 'crud.dart';
 import 'note_edit.dart';
 
 
-class NoteView extends StatelessWidget {
-  const NoteView({Key? key, required this.note}) : super(key: key);
-
+class NoteView extends StatefulWidget {
   final Note note;
+  @override
+  _NoteViewState createState() => _NoteViewState();
+  const NoteView({Key? key, required this.note}) : super(key: key);
+}
+
+class _NoteViewState extends State<NoteView> {
 
   Widget build(BuildContext context) {
+    final note = widget.note;
     return Scaffold(
         appBar: AppBar(
           title: Text(

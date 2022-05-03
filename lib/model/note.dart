@@ -5,17 +5,14 @@ part 'note.g.dart';
 @HiveType(typeId: 0)
 class Note extends HiveObject {
   @HiveField(0)
-  final int? id;
+  late String name;
 
   @HiveField(1)
-  final String name;
-
-  @HiveField(2)
-  final String text;
+  late String text;
 
   String get plainText => text.replaceAll('\n', ' ');
 
-  Note(this.name, this.text, this.id);
+  Note(this.name, this.text);
 
   Note copy({
     int? id,
@@ -25,6 +22,5 @@ class Note extends HiveObject {
       Note(
         name ?? this.name,
         text ?? this.text,
-        id ?? this.id,
       );
 }

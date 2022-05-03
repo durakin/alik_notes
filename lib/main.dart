@@ -18,7 +18,7 @@ void main() async {
   Hive.registerAdapter(EventAdapter());
   await Hive.openBox<Note>('notes');
   await Hive.openBox<Event>('events');
-  Boxes.getNotes().add(Note("Kavo", "Suchara", null));
+  Boxes.getNotes().add(Note("Kavo", "Suchara"));
   runApp(const MyApp());
 }
 
