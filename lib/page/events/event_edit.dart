@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:alik_notes/page/events/event_view.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +63,7 @@ class EventEdit extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
+                if (nameController.text == "") return;
                 if (event == null) {
                   addEvent(Event(
                       nameController.text,

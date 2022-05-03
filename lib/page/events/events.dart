@@ -82,20 +82,6 @@ class _EventsState extends State<Events> {
         ),
       ),
     );
-    //body: ListView(children: dividedFuture),
-    //floatingActionButton: FloatingActionButton(
-    //  onPressed: () {
-    //    Navigator.push(
-    //        context,
-    //        MaterialPageRoute(
-    //            builder: (context) => const EventEdit(event: null)));
-    //  },
-    //  backgroundColor: Colors.red,
-    //  child: const Icon(
-    //    Icons.edit_calendar_outlined,
-    //    color: Colors.white,
-    //  ),
-    //));
   }
 
   Widget buidContent(List<Event> events, BuildContext context) {
@@ -125,11 +111,6 @@ class _EventsState extends State<Events> {
             ],
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           ),
-          /*() {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => NoteView(note: note)));
-            }
-             */
         ));
     final pastTiles = pastEvents.map((event) => ListTile(
           title: Text(
@@ -151,22 +132,20 @@ class _EventsState extends State<Events> {
           },
         ));
 
+    final dividedFuture = futureEvents.isNotEmpty
+        ? ListTile.divideTiles(
+            context: context,
+            tiles: futuretiles,
+          ).toList()
+        : <Widget>[];
 
-    //final dividedFuture = futureEvents.isNotEmpty
-    //    ? ListTile.divideTiles(
-    //        context: context,
-    //        tiles: futuretiles,
-    //      ).toList
-    //    : <ListTile>[];
-//
-    //final dividedPast = pastEvents.isNotEmpty
-    //    ? ListTile.divideTiles(
-    //        context: context,
-    //        tiles: pastTiles,
-    //      ).toList()
-    //    : <ListTile>[];
+    final dividedPast = pastEvents.isNotEmpty
+        ? ListTile.divideTiles(
+            context: context,
+            tiles: pastTiles,
+          ).toList()
+        : <Widget>[];
 
-    //dividedFuture.add(const Divider(thickness: 8));
-    return ListView(children: futuretiles.toList());
+    return ListView(children: dividedFuture + dividedPast);
   }
 }
