@@ -1,28 +1,10 @@
-import 'package:alik_notes/notes.dart';
+
+import 'package:alik_notes/page/notes/notes.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:alik_notes/model/event.dart';
 
-class Event {
-  final String name;
-  final DateTime dateTime;
-  final String? place;
-
-  bool get isPast => DateTime.now().toUtc().isAfter(dateTime);
-  bool get isSoon =>
-      DateTime.now().add(const Duration(hours: 24)).toUtc().isAfter(dateTime);
-
-  String get weather => "+7, Гроза";
-  String get plainText =>
-      (place != null) ? place!.replaceAll("\n", " ") : "Место не указано";
-  String get dateText => (isPast
-      ? DateFormat.Md().add_y().format(dateTime.toUtc())
-      : isSoon
-          ? DateFormat.Hm().format(dateTime.toUtc())
-          : DateFormat.Md().add_Hm().format(dateTime.toUtc()));
-
-  const Event(this.name, this.dateTime, this.place);
-}
 
 class EventEdit extends StatelessWidget {
   final Event? event;
@@ -331,7 +313,7 @@ class _EventsState extends State<Events> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Notes()));
+                              builder: (context) => Notes()));
                     },
                   ),
                   const Divider(thickness: 2),

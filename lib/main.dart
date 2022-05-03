@@ -2,10 +2,23 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:alik_notes/notes.dart';
+import 'package:alik_notes/model/event.dart';
+import 'package:alik_notes/page/notes/notes.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+import 'boxes.dart';
+import 'model/note.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(NoteAdapter());
+  Hive.registerAdapter(EventAdapter());
+  await Hive.openBox<Note>('notes');
+  await Hive.openBox<Event>('events');
+  Boxes.getNotes().add(Note("Kavo", "Suchara", null));
   runApp(const MyApp());
 }
 
@@ -13,12 +26,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Alik notes",
-      home: const Notes(),
+      home: Notes(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.blueGrey,
