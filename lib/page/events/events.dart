@@ -1,7 +1,6 @@
 import 'package:alik_notes/page/notes/notes.dart';
 import 'package:flutter/material.dart';
 import 'package:alik_notes/model/event.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../db/boxes.dart';
@@ -137,14 +136,14 @@ class _EventsState extends State<Events> {
             context: context,
             tiles: futuretiles,
           ).toList()
-        : <Widget>[];
+        : <ListTile>[];
 
     final dividedPast = pastEvents.isNotEmpty
         ? ListTile.divideTiles(
             context: context,
             tiles: pastTiles,
           ).toList()
-        : <Widget>[];
+        : <ListTile>[];
 
     return ListView(children: dividedFuture + dividedPast);
   }

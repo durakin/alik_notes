@@ -5,10 +5,8 @@
 import 'package:alik_notes/model/event.dart';
 import 'package:alik_notes/page/notes/notes.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'db/boxes.dart';
 import 'model/note.dart';
 
 void main() async {
@@ -18,7 +16,6 @@ void main() async {
   Hive.registerAdapter(EventAdapter());
   await Hive.openBox<Note>('notes');
   await Hive.openBox<Event>('events');
-  Boxes.getNotes().add(Note("Kavo", "Suchara"));
   runApp(const MyApp());
 }
 
