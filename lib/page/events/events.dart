@@ -4,6 +4,7 @@ import 'package:alik_notes/model/event.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../db/boxes.dart';
+import '../map/map.dart';
 import 'event_edit.dart';
 import 'event_view.dart';
 
@@ -50,6 +51,18 @@ class _EventsState extends State<Events> {
                   },
                 ),
                 const Divider(thickness: 2),
+                ListTile(
+                  leading: const Icon(Icons.map_outlined, color: Colors.white),
+                  title: Text("Карта?)",
+                      style: (Theme.of(context).textTheme.headline6)
+                          ?.copyWith(color: Colors.white)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MapPage()));
+                  },
+                ),
                 ListTile(
                   leading: const Icon(Icons.info_outline, color: Colors.white),
                   title: Text("О приложении",

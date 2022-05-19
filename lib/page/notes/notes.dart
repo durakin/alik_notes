@@ -1,5 +1,6 @@
 import 'package:alik_notes/model/note.dart';
 import 'package:alik_notes/page/events/events.dart';
+import 'package:alik_notes/page/map/map.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -14,7 +15,6 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +51,18 @@ class _NotesState extends State<Notes> {
                 ),
                 const Divider(thickness: 2),
                 ListTile(
+                  leading: const Icon(Icons.map_outlined, color: Colors.white),
+                  title: Text("Карта?)",
+                      style: (Theme.of(context).textTheme.headline6)
+                          ?.copyWith(color: Colors.white)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MapPage()));
+                  },
+                ),
+                ListTile(
                   leading: const Icon(Icons.info_outline, color: Colors.white),
                   title: Text("О приложении",
                       style: (Theme.of(context).textTheme.headline6)
@@ -67,7 +79,8 @@ class _NotesState extends State<Notes> {
           final notes = box.values.toList().cast<Note>();
           return buildContent(notes, context);
         },
-      ),      floatingActionButton: FloatingActionButton(
+      ),
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
               context,
@@ -98,9 +111,9 @@ class _NotesState extends State<Notes> {
 
     final divided = tiles.isNotEmpty
         ? ListTile.divideTiles(
-      context: context,
-      tiles: tiles,
-    ).toList()
+            context: context,
+            tiles: tiles,
+          ).toList()
         : <Widget>[];
 
     return ListView(children: divided);

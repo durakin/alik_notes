@@ -4,6 +4,8 @@
         android:label="alik_notes"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyAZgteC5ghKqa42LHJ0wfbSworu3QlA2DA"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
