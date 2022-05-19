@@ -6,10 +6,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../db/boxes.dart';
 import '../../model/note.dart';
+import '../weather/weather.dart';
 import 'note_edit.dart';
 import 'note_view.dart';
 
 class Notes extends StatefulWidget {
+  const Notes({Key? key}) : super(key: key);
+
   @override
   _NotesState createState() => _NotesState();
 }
@@ -46,13 +49,13 @@ class _NotesState extends State<Notes> {
                           ?.copyWith(color: Colors.white)),
                   onTap: () {
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Notes()));
+                        MaterialPageRoute(builder: (context) => const Notes()));
                   },
                 ),
                 const Divider(thickness: 2),
                 ListTile(
                   leading: const Icon(Icons.map_outlined, color: Colors.white),
-                  title: Text("Карта?)",
+                  title: Text("Карта",
                       style: (Theme.of(context).textTheme.headline6)
                           ?.copyWith(color: Colors.white)),
                   onTap: () {
@@ -60,6 +63,18 @@ class _NotesState extends State<Notes> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const MapPage()));
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.map_outlined, color: Colors.white),
+                  title: Text("Погода",
+                      style: (Theme.of(context).textTheme.headline6)
+                          ?.copyWith(color: Colors.white)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WeatherPage()));
                   },
                 ),
                 ListTile(
