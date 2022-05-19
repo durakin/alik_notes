@@ -8,7 +8,6 @@ Future<Weather> fetchWeather() async {
       .get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=55.994446&lon=92.797586&appid=0416cd11b0822dcdcf8f342dc9924b75&units=metric&lang=RU'));
 
   if (response.statusCode == 200) {
-
     return Weather.fromJson(jsonDecode(response.body));
   } else {
     // If the server did not return a 200 OK response,
@@ -59,7 +58,7 @@ class Weather {
     return Weather(
       weatherId: json['weather'][0]['id'],
       weatherName: json['weather'][0]['description'],
-      temperature: json['main']['temp'],
+      temperature: json['main']['temp'].round(),
     );
   }
 }

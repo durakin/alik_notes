@@ -76,17 +76,6 @@ class EventView extends StatelessWidget {
           Card(
             child: ListTile(
               title: Text(
-                event.weather,
-                style: const TextStyle(color: Colors.white),
-              ),
-              leading:
-                  const Icon(Icons.thermostat_outlined, color: Colors.white),
-            ),
-            color: const Color(0xff263238),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
                 event.plainText,
                 style: const TextStyle(color: Colors.white),
               ),
@@ -94,9 +83,6 @@ class EventView extends StatelessWidget {
             ),
             color: const Color(0xff263238),
           ),
-          const Padding(
-              padding: EdgeInsets.all(16),
-              child: Image(image: AssetImage('assets/map.png'))),
         ],
       ),
     );

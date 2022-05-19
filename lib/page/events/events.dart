@@ -129,13 +129,6 @@ class _EventsState extends State<Events> {
                 MaterialPageRoute(
                     builder: (context) => EventView(event: event)));
           },
-          trailing: Column(
-            children: [
-              Text(event.dateText),
-              Icon(Icons.bolt_outlined),
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          ),
         ));
     final pastTiles = pastEvents.map((event) => ListTile(
           title: Text(
